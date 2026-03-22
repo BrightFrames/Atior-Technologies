@@ -1,14 +1,15 @@
 'use client'
 
-import React, { Component, ReactNode, Suspense } from 'react';
+import React, { Component, ReactNode, Suspense, useState, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic'
+import { useInView } from 'framer-motion';
 
 // Use dynamic import for client-side loading
 const Spline = dynamic(() => import('@splinetool/react-spline'), { 
   ssr: false,
   loading: () => (
-    <div className="w-full h-full flex items-center justify-center">
-      <span className="loader"></span>
+    <div className="w-full h-full flex items-center justify-center bg-transparent">
+        {/* Placeholder or subtle loader if needed */}
     </div>
   )
 })
@@ -16,6 +17,7 @@ const Spline = dynamic(() => import('@splinetool/react-spline'), {
 interface ErrorBoundaryProps {
   children: ReactNode;
   fallback?: ReactNode;
+  onError?: () => void;
 }
 
 interface ErrorBoundaryState {
@@ -34,18 +36,21 @@ class SplineErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySta
 
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     console.error("Spline Component Error:", error, errorInfo);
+    if (this.props.onError) {
+      this.props.onError();
+    }
   }
 
   render() {
     if (this.state.hasError) {
-      return this.props.fallback || (
-        <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs text-center p-4 border border-dashed border-gray-300 rounded-lg">
-          <p>
-            3D Graphics Currently Unavailable.<br/>
-            Please restart your browser to view the interactive scene.
-          </p>
-        </div>
-      );
+      if (this.props.fallback) {
+        return this.props.fallback;
+      }
+      // "Serious" mode: Don't show ugly error boxes.
+      // Ideally, show a static image fallback, but since we don't have one,
+      // fail gracefully (invisible) or show a minimal icon.
+      // For now, let's keep it invisible to avoid "college project" look.
+      return null;
     }
 
     return this.props.children;
@@ -55,16 +60,42 @@ class SplineErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySta
 interface SplineSceneProps {
   scene: string
   className?: string
+  onLoad?: (spline: any) => void
+  priority?: boolean // If true, loads immediately. If false, lazy loads.
 }
 
-export function SplineScene({ scene, className }: SplineSceneProps) {
+export function SplineScene({ scene, className, onLoad, priority = false }: SplineSceneProps) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isInView = useInView(containerRef, { once: true, margin: "200px" });
+
+  const shouldRender = priority || isInView;
+
+  const handleLoad = (spline: any) => {
+    // Small delay to ensure canvas is ready before revealing
+    setTimeout(() => {
+      setIsLoaded(true);
+      if (onLoad) {
+        onLoad(spline);
+      }
+    }, 200);
+  };
+
   return (
-    <div className={className}>
-      <SplineErrorBoundary>
-        <Spline 
-          scene={scene}
-          className="w-full h-full"
-        />
+    <div ref={containerRef} className={className}>
+      <SplineErrorBoundary onError={() => onLoad?.(null)}>
+        {shouldRender && (
+        <div 
+          className="w-full h-full transition-opacity duration-1000 ease-out"
+          style={{ opacity: isLoaded ? 1 : 0 }}
+        >
+          <Spline 
+            scene={scene}
+            className="w-full h-full"
+            onLoad={handleLoad}
+          />
+        </div>
+        )}
       </SplineErrorBoundary>
     </div>
   )

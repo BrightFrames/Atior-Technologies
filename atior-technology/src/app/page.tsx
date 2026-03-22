@@ -1,13 +1,29 @@
 'use client'
 
+import { useState, useEffect } from 'react';
 import { SplineScene } from "@/components/ui/splite";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from 'next/image';
+import Preloader from '@/components/ui/Preloader';
 
 export default function Home() {
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    // Fallback to remove loader after max 10 seconds if 3D model takes too long
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 10000);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <main className="min-h-screen bg-[#f5f5f5] text-black font-sans selection:bg-black selection:text-white overflow-x-hidden relative">
       
+      <AnimatePresence mode="wait">
+        {isLoading && <Preloader key="preloader" />}
+      </AnimatePresence>
+
       {/* SECTION 1: PORTFOLIO */}
       <section className="relative w-full h-[100vh] flex flex-col items-center justify-center overflow-hidden">
         
@@ -63,6 +79,8 @@ export default function Home() {
                      <SplineScene 
                         scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                         className="w-full h-full"
+                        onLoad={() => setIsLoading(false)}
+                        priority={true}
                       />
                 </motion.div>
             </div>
