@@ -18,7 +18,7 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-[#f5f5f5] text-black font-sans selection:bg-black selection:text-white overflow-x-hidden relative">
+    <main className="min-h-screen bg-[#f8f8f8] text-black font-sans selection:bg-black selection:text-white overflow-x-hidden relative">
       
       <AnimatePresence mode="wait">
         {isLoading && <Preloader key="preloader" />}
@@ -111,7 +111,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 2: THE STORY */}
-      <section className="relative w-full min-h-screen bg-[#efefef] flex items-center justify-center overflow-hidden py-12 md:py-0">
+      <section className="relative w-full min-h-screen bg-transparent flex items-center justify-center overflow-hidden py-12 md:py-0">
          <div className="w-full max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-12 items-center h-full relative">
             
             {/* Left Column: Title and Robot */}
@@ -132,7 +132,7 @@ export default function Home() {
                     whileInView={{ opacity: 1, scale: 1 }}
                     viewport={{ once: false, amount: 0.3 }}
                     transition={{ duration: 0.8, delay: 0.2 }}
-                    className="w-full h-[300px] md:h-[500px] relative z-30 hidden md:flex justify-center md:justify-start mt-[-20px] ml-0"
+                    className="w-full h-[300px] md:h-[500px] relative z-30 hidden md:flex justify-center md:justify-start mt-4 ml-0"
                 >
                      <div className="w-full h-full scale-x-[-1]">
                         <SplineScene 
@@ -196,13 +196,13 @@ export default function Home() {
       </section>
 
       {/* SECTION 3: WHO WE ARE */}
-      <section className="relative w-full min-h-screen bg-[#f5f5f5] flex flex-col justify-center items-center overflow-hidden py-12 md:py-0 text-black">
+      <section className="relative w-full min-h-screen bg-transparent flex flex-col justify-center items-center overflow-hidden py-12 md:py-0 text-black">
           
           <div className="w-full max-w-7xl mx-auto px-4 relative h-full min-h-[80vh] flex flex-col justify-between">
               
               <div className="flex-grow flex items-center justify-center relative w-full">
                 {/* Main Title */}
-                <div className="relative z-10 text-center md:text-center w-full">
+                <div className="relative z-10 text-center md:text-left w-full">
                     <motion.h2 
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -215,7 +215,7 @@ export default function Home() {
                 </div>
 
                 {/* Right List - Positioned absolutely on desktop */}
-                <div className="relative md:absolute md:top-1/2 md:-translate-y-1/2 md:right-0 z-20 text-center md:text-right mt-8 md:mt-0">
+                <div className="relative md:absolute md:top-1/2 md:-translate-y-1/2 md:right-12 z-20 text-center md:text-right mt-8 md:mt-0">
                     <ul className="space-y-2 text-sm md:text-base font-bold text-gray-800 uppercase tracking-widest">
                         {["SOFTWARE", "PLATFORMS", "SAAS", "AUTOMATION", "TOOLS", "INFRASTRUCTURE", "CLOUD", "PRODUCTS"].map((item, i) => (
                              <motion.li 
@@ -252,7 +252,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 4: OUR VISION */}
-      <section className="relative w-full min-h-screen bg-[#efefef] flex items-center justify-center overflow-hidden py-12 md:py-0 text-black">
+      <section className="relative w-full min-h-screen bg-transparent flex items-center justify-center overflow-hidden py-12 md:py-0 text-black">
          <div className="w-full max-w-7xl mx-auto px-4 flex flex-col md:flex-row h-full relative min-h-[80vh]">
 
             {/* Left Content - Title & Robot */}
@@ -321,25 +321,24 @@ export default function Home() {
       </section>
 
       {/* SECTION 5: OUR EXPERIENCE */}
-      <section className="relative w-full min-h-screen bg-[#f5f5f5] flex flex-col items-center justify-center overflow-hidden py-12 text-black">
+      <section className="relative w-full min-h-screen bg-transparent flex flex-col items-center justify-center overflow-hidden py-12 text-black">
           <div className="w-full max-w-7xl mx-auto px-4 flex flex-col relative min-h-[80vh]">
                
                <div className="flex flex-col md:flex-row h-full">
                     {/* Left Column: Title & Robot */}
-                    <div className="w-full md:w-[40%] flex flex-col relative z-20">
+                    <div className="w-full md:w-[50%] flex flex-col relative z-20">
                         <motion.h2 
                             initial={{ opacity: 0, x: -50 }}
                             whileInView={{ opacity: 1, x: 0 }}
                             viewport={{ once: false, amount: 0.3 }}
                             transition={{ duration: 0.8 }}
-                            className="text-[15vw] md:text-[6vw] font-black leading-[0.9] tracking-tighter uppercase text-black mb-4 md:mb-0"
+                            className="text-[15vw] md:text-[5vw] font-black leading-[0.9] tracking-tighter uppercase text-black mb-4 md:mb-0"
                         >
                             OUR <br/> EXPERIENCE
                         </motion.h2>
 
-                         {/* Robot Pointing Right (using scale-x-[-1] to flip if needed, but original points left? let's see. 
-                             Original scene robot stands. I'll just place him here.) */}
-                        <div className="w-full h-[300px] md:h-[500px] relative z-10 mt-[-50px] md:mt-[-100px]">
+                        {/* Robot Pointing Right */}
+                        <div className="w-full h-[300px] md:h-[500px] relative z-10 mt-8 md:mt-0">
                             <SplineScene 
                                 scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
                                 className="w-full h-full"
@@ -348,7 +347,7 @@ export default function Home() {
                     </div>
 
                     {/* Right Column: Content */}
-                    <div className="w-full md:w-[60%] flex flex-col z-20 pt-10 md:pt-0">
+                    <div className="w-full md:w-[50%] flex flex-col z-20 pt-10 md:pt-0 md:pl-12">
                         <motion.p 
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -408,7 +407,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 6: CUSTOM IT SOLUTIONS */}
-      <section className="relative w-full min-h-screen bg-[#efefef] flex flex-col justify-center py-12 md:py-24 text-black">
+      <section className="relative w-full min-h-screen bg-transparent flex flex-col justify-center py-12 md:py-24 text-black">
          <div className="w-full max-w-7xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-16 min-h-[80vh]">
 
             {/* Left Column */}
@@ -504,7 +503,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 7: OUR PROCESS */}
-      <section className="relative w-full min-h-screen bg-[#f5f5f5] text-black overflow-hidden py-12 md:py-20">
+      <section className="relative w-full min-h-screen bg-transparent text-black overflow-hidden py-12 md:py-20">
            <div className="w-full max-w-7xl mx-auto px-4 relative h-full flex flex-col">
                
                {/* Top Right Text */}
@@ -586,7 +585,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 8: TESTIMONIALS */}
-      <section className="relative w-full bg-[#efefef] text-black py-16 md:py-24 overflow-hidden">
+      <section className="relative w-full bg-transparent text-black py-16 md:py-24 overflow-hidden">
           <div className="w-full max-w-7xl mx-auto px-4 flex flex-col items-center">
               
               <motion.h2 
@@ -704,7 +703,7 @@ export default function Home() {
       </section>
 
       {/* SECTION 9: LET'S CONNECT (Footer) */}
-      <section className="relative w-full min-h-screen bg-[#f5f5f5] text-black overflow-hidden py-12 md:py-20 flex flex-col justify-between">
+      <section className="relative w-full min-h-screen bg-transparent text-black overflow-hidden py-12 md:py-20 flex flex-col justify-between">
            <div className="w-full max-w-7xl mx-auto px-4 relative h-full flex flex-col flex-grow">
                
                {/* Top Content Row */}
