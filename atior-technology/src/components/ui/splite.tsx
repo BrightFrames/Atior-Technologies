@@ -1,6 +1,6 @@
 'use client'
 
-import React, { Component, ReactNode, Suspense, useState, useRef, useEffect } from 'react';
+import React, { Component, ReactNode, useState, useRef } from 'react';
 import dynamic from 'next/dynamic'
 import { useInView } from 'framer-motion';
 
@@ -30,7 +30,7 @@ class SplineErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySta
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError(_: Error): ErrorBoundaryState {
+  static getDerivedStateFromError(): ErrorBoundaryState {
     return { hasError: true };
   }
 
@@ -60,7 +60,7 @@ class SplineErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySta
 interface SplineSceneProps {
   scene: string
   className?: string
-  onLoad?: (spline: any) => void
+  onLoad?: (spline: unknown | null) => void
   priority?: boolean // If true, loads immediately. If false, lazy loads.
 }
 
@@ -71,7 +71,7 @@ export function SplineScene({ scene, className, onLoad, priority = false }: Spli
 
   const shouldRender = priority || isInView;
 
-  const handleLoad = (spline: any) => {
+  const handleLoad = (spline: unknown) => {
     // Small delay to ensure canvas is ready before revealing
     setTimeout(() => {
       setIsLoaded(true);

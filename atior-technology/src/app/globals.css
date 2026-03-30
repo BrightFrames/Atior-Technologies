@@ -121,3 +121,12 @@
     transform: rotate(360deg);
 }
 }
+
+.hero-surface {
+  background-color: #1b1e23;
+  background-image:
+  radial-gradient(circle at 24% 8%, rgba(255, 255, 255, 0.06), transparent 26%),
+  radial-gradient(circle at 76% 0%, rgba(201, 154, 43, 0.14), transparent 24%),
+  repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.018) 0, rgba(255, 255, 255, 0.018) 2px, transparent 2px, transparent 8px),
+  linear-gradient(165deg, #252933 0%, #1a1d23 45%, #14171d 100%);
+}
