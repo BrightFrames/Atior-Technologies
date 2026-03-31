@@ -15,6 +15,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Atior Technology",
   description: "Atior Technology - Building Powerful Digital Solutions",
+  icons: {
+    icon: [{ url: "/atior-favicon.svg", type: "image/svg+xml", sizes: "64x64" }],
+    shortcut: [{ url: "/atior-favicon.svg", type: "image/svg+xml", sizes: "64x64" }],
+    apple: [{ url: "/atior-logo.svg", type: "image/svg+xml" }],
+  },
 };
 
 export default function RootLayout({

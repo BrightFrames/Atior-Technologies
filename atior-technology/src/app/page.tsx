@@ -168,21 +168,54 @@ export default function Home() {
     "Long-Term Support",
   ];
 
+  const topStats = [
+    { value: "100+", label: "Startups Trusted Us" },
+    { value: "50+", label: "Products Delivered" },
+    { value: "6", label: "Live Platforms" },
+    { value: "3+", label: "Years Building" },
+  ];
+
+  const topNavLinks = [
+    { label: "Services", href: "#services" },
+    { label: "Work", href: "#work" },
+    { label: "Process", href: "#process" },
+    { label: "Clients", href: "#clients" },
+    { label: "Projects", href: "#work" },
+  ];
+
   return (
     <>
       <AnimatePresence mode="wait">{isLoading && <Preloader key="preloader" />}</AnimatePresence>
       <main className="hero-surface relative min-h-screen overflow-x-hidden text-[#f5f5f5]">
-      <section className="relative mx-auto flex min-h-screen w-full max-w-350 flex-col px-5 pb-8 pt-6 sm:px-8 md:px-12 md:pb-10 md:pt-8">
-        <div className="pointer-events-none absolute left-0 top-19.5 h-px w-[58%] bg-[#c79f2a]/90" />
+      <section className="relative mx-auto flex min-h-screen w-full max-w-350 flex-col px-5 pb-8 pt-0 sm:px-8 md:px-12 md:pb-10 md:pt-0">
+        <div className="pointer-events-none absolute left-0 top-0 h-px w-[58%] bg-[#c79f2a]/90" />
 
-        <header className="relative z-20 flex items-start justify-between">
-          <div>
+        <header className="relative z-20 flex items-center justify-between gap-4 pt-0">
+          <div className="shrink-0">
             <p className="font-(family-name:--font-geist-sans) text-[18px] font-semibold uppercase tracking-[0.06em] text-[#f3f3f3] sm:text-[22px]">
               Atior Technologies
             </p>
           </div>
 
-          <AtiorLogo className="h-18 w-19" />
+          <nav
+            className="hidden bg-transparent px-2 py-2 md:block"
+            aria-label="Homepage sections"
+          >
+            <ul className="flex flex-nowrap items-center gap-4 overflow-x-auto whitespace-nowrap lg:gap-7">
+              {topNavLinks.map((item) => (
+                <li key={item.label}>
+                  <a
+                    href={item.href}
+                    className="font-(family-name:--font-geist-sans) text-[13px] font-semibold uppercase tracking-[0.06em] text-[#a8b1c4] transition-colors hover:text-[#e7ebf4] lg:text-[17px]"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <AtiorLogo className="h-32 w-34" />
         </header>
 
         <div className="relative z-20 mt-10 max-w-167.5 sm:mt-14 md:mt-10 lg:mt-8">
@@ -207,8 +240,8 @@ export default function Home() {
           />
         </div>
 
-        <footer className="relative z-20 mt-auto flex flex-col gap-8 pt-10 md:flex-row md:items-end md:justify-between md:pt-0">
-          <p className="max-w-140 font-(family-name:--font-geist-sans) text-[15px] font-medium uppercase leading-tight tracking-[0.02em] text-[#ececec] sm:text-[20px]">
+        <footer className="relative z-20 mt-auto flex flex-col gap-5 pt-6 md:flex-row md:items-end md:justify-between md:pt-0">
+          <p className="max-w-140 font-(family-name:--font-geist-sans) text-[14px] font-medium uppercase leading-tight tracking-[0.02em] text-[#ececec] sm:text-[17px]">
             Trusted by 100+ startups and growing businesses.
             <br />
             More than 50+ products successfully delivered and still counting
@@ -220,6 +253,22 @@ export default function Home() {
             <p>+91 7696834279, 7743096565</p>
           </div>
         </footer>
+
+        <div className="relative z-20 mt-5 px-2 sm:px-3">
+          <div className="h-px w-full bg-[#8a773e]/40" />
+          <div className="grid grid-cols-2 gap-x-8 gap-y-4 pb-3 pt-4 sm:grid-cols-4 md:gap-x-10 md:pb-4 md:pt-5">
+            {topStats.map((stat) => (
+              <article key={stat.label}>
+                <p className="font-serif text-[38px] leading-none text-[#d8b35d] md:text-[42px]">
+                  {stat.value}
+                </p>
+                <p className="mt-1.5 font-(family-name:--font-geist-sans) text-[12px] font-semibold leading-[1.05] text-[#a7afbf] md:text-[17px]">
+                  {stat.label}
+                </p>
+              </article>
+            ))}
+          </div>
+        </div>
       </section>
 
       <section className="relative mx-auto w-full max-w-350 px-5 pb-14 pt-6 sm:px-8 md:px-12 md:pb-20 md:pt-8">
@@ -237,7 +286,7 @@ export default function Home() {
               </h2>
             </div>
 
-            <AtiorLogo className="h-18 w-19" />
+            <AtiorLogo className="h-32 w-34" />
           </header>
 
           <div className="relative z-10 mt-8 grid gap-7 md:mt-10 md:grid-cols-2 md:gap-8">
@@ -276,7 +325,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative mx-auto w-full max-w-350 px-5 pb-16 pt-2 sm:px-8 md:px-12 md:pb-24 md:pt-2">
+      <section id="services" className="relative mx-auto w-full max-w-350 px-5 pb-16 pt-2 sm:px-8 md:px-12 md:pb-24 md:pt-2">
         <div className="relative overflow-hidden rounded-[28px] border border-[#474b53] bg-[#15181d]/88 p-6 shadow-[0_16px_70px_rgba(0,0,0,0.4)] sm:p-8 md:p-10">
           <div className="pointer-events-none absolute left-0 top-0 h-px w-full bg-[#8d9098]/40" />
           <div className="pointer-events-none absolute left-7 top-10 h-px w-[43%] bg-[#c79f2a]/90 md:left-10" />
@@ -295,7 +344,7 @@ export default function Home() {
               </p>
             </div>
 
-            <AtiorLogo className="h-18 w-19" />
+            <AtiorLogo className="h-32 w-34" />
           </header>
 
           <div className="relative z-10 mt-7 grid gap-5 md:mt-8 md:grid-cols-3 md:gap-6">
@@ -332,7 +381,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative mx-auto w-full max-w-350 px-5 pb-14 pt-1 sm:px-8 md:px-12 md:pb-18 md:pt-1">
+      <section id="work" className="relative mx-auto w-full max-w-350 px-5 pb-14 pt-1 sm:px-8 md:px-12 md:pb-18 md:pt-1">
         <div className="relative overflow-hidden rounded-[28px] border border-[#d1cdc2] bg-[#efede8] p-6 text-[#131417] shadow-[0_16px_56px_rgba(0,0,0,0.28)] sm:p-8 md:p-10">
           <div className="pointer-events-none absolute inset-0 opacity-70 [background:repeating-linear-gradient(150deg,rgba(120,110,90,0.05)_0px,rgba(120,110,90,0.05)_2px,transparent_2px,transparent_10px)]" />
           <div className="pointer-events-none absolute left-6 top-11 h-px w-[43%] bg-[#c79f2a]/85 md:left-10" />
@@ -418,7 +467,7 @@ export default function Home() {
               </h2>
             </div>
 
-            <AtiorLogo className="h-18 w-19" />
+            <AtiorLogo className="h-32 w-34" />
           </header>
 
           <div className="relative z-10 mt-7 grid gap-4 md:mt-8 md:grid-cols-4 md:gap-4">
@@ -462,7 +511,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative mx-auto w-full max-w-350 px-5 pb-14 pt-1 sm:px-8 md:px-12 md:pb-18 md:pt-1">
+      <section id="clients" className="relative mx-auto w-full max-w-350 px-5 pb-14 pt-1 sm:px-8 md:px-12 md:pb-18 md:pt-1">
         <div className="relative overflow-hidden rounded-[28px] border border-[#474b53] bg-[#15181d]/88 p-6 shadow-[0_16px_70px_rgba(0,0,0,0.4)] sm:p-8 md:p-10">
           <div className="pointer-events-none absolute left-0 top-0 h-px w-full bg-[#8d9098]/40" />
           <div className="pointer-events-none absolute left-7 top-10 h-px w-[43%] bg-[#c79f2a]/90 md:left-10" />
@@ -477,7 +526,7 @@ export default function Home() {
               </h2>
             </div>
 
-            <AtiorLogo className="h-18 w-19" />
+            <AtiorLogo className="h-32 w-34" />
           </header>
 
           <div className="relative z-10 mt-7 overflow-hidden rounded-[14px] border border-[#2e3440]">
@@ -516,7 +565,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative mx-auto w-full max-w-350 px-5 pb-20 pt-1 sm:px-8 md:px-12 md:pb-24 md:pt-1">
+      <section id="process" className="relative mx-auto w-full max-w-350 px-5 pb-20 pt-1 sm:px-8 md:px-12 md:pb-24 md:pt-1">
         <div className="relative overflow-hidden rounded-[28px] border border-[#d1cdc2] bg-[#efede8] p-6 text-[#131417] shadow-[0_16px_56px_rgba(0,0,0,0.28)] sm:p-8 md:p-10">
           <div className="pointer-events-none absolute inset-0 opacity-70 [background:repeating-linear-gradient(150deg,rgba(120,110,90,0.05)_0px,rgba(120,110,90,0.05)_2px,transparent_2px,transparent_10px)]" />
 
@@ -615,7 +664,7 @@ export default function Home() {
               </p>
             </div>
 
-            <AtiorLogo className="h-18 w-19" />
+            <AtiorLogo className="h-32 w-34" />
           </header>
 
           <div className="relative z-10 mt-8 grid items-end gap-6 md:mt-10 md:grid-cols-[0.9fr_1.1fr]">
