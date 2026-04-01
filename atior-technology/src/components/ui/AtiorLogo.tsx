@@ -8,7 +8,7 @@ export default function AtiorLogo({ className = "" }: AtiorLogoProps) {
   return (
     <div className={`relative overflow-hidden text-white ${className}`} aria-label="Atior logo" role="img">
       <Image
-        src="/atior-logo.svg"
+        src="/atior%20logo.png"
         alt="Atior logo"
         fill
         sizes="(max-width: 640px) 128px, 160px"

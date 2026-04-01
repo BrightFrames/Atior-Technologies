@@ -122,6 +122,105 @@
 }
 }
 
+@keyframes shimmer {
+  0% {
+    transform: translateX(-40%);
+  }
+  100% {
+    transform: translateX(40%);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.projects-filter .filter-btn,
+.filter-btn {
+  border: 1px solid rgba(212, 168, 67, 0.2);
+  background: rgba(12, 20, 34, 0.82);
+  color: #aab1bf;
+  border-radius: 9999px;
+  padding: 0.55rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.projects-filter .filter-btn:hover,
+.filter-btn:hover {
+  color: #cb9c27;
+  border-color: rgba(212, 168, 67, 0.4);
+  background: rgba(212, 168, 67, 0.12);
+  transform: translateY(-1px);
+}
+
+.projects-filter .filter-btn.active,
+.filter-btn.active {
+  color: #111217;
+  border-color: rgba(212, 168, 67, 0.55);
+  background: #d4a843;
+}
+
+.project-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 9999px;
+  border: 1px solid transparent;
+  padding: 0.35rem 0.7rem;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.status-live {
+  background: rgba(74, 122, 170, 0.15);
+  color: #d4a843;
+  border-color: rgba(212, 168, 67, 0.28);
+}
+
+.status-delivered {
+  background: rgba(212, 168, 67, 0.12);
+  color: #edcc7e;
+  border-color: rgba(212, 168, 67, 0.24);
+}
+
+.project-link {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: #aab1bf;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.project-link:hover {
+  color: #cb9c27;
+}
+
 .hero-surface {
   background-color: #1b1e23;
   background-image:
