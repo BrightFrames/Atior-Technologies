@@ -2,9 +2,9 @@
 
 import { motion } from "framer-motion";
 import { ArrowUpRight } from "lucide-react";
-import AntigravityBackground from "@/components/ui/AntigravityBackground";
-import { Badge } from "@/components/ui/badge";
-import { Card } from "@/components/ui/card";
+import AntigravityBackground from "./AntigravityBackground";
+import { Badge } from "./badge";
+import { Card } from "./card";
 import Image from "next/image";
 
 const projects = [

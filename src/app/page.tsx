@@ -3,27 +3,27 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, ChevronRight, ChevronDown, XCircle, Layout, Layers, Terminal, PhoneCall, Mail, Globe, Star } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
-import { Separator } from "@/components/ui/separator";
-import AtiorLogo from "@/components/ui/AtiorLogo";
-import { SplineScene } from "@/components/ui/splite";
-import AntigravityBackground from "@/components/ui/AntigravityBackground";
+import { Button } from "../components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
+import { Badge } from "../components/ui/badge";
+import { Separator } from "../components/ui/separator";
+import AtiorLogo from "../components/ui/AtiorLogo";
+import { SplineScene } from "../components/ui/splite";
+import AntigravityBackground from "../components/ui/AntigravityBackground";
 import dynamic from "next/dynamic";
 
-const LazyWorkSection = dynamic(() => import("@/components/ui/WorkSection"), {
+const LazyWorkSection = dynamic(() => import("../components/ui/WorkSection"), {
   loading: () => <div className="h-screen w-full flex items-center justify-center bg-slate-50"><div className="animate-pulse flex flex-col items-center gap-4"><div className="w-12 h-12 rounded-full border-4 border-blue-600/30 border-t-blue-600 animate-spin"></div><p className="text-slate-500 font-medium">Loading Work Showcase...</p></div></div>,
   ssr: false
 });
 
-const LazyProcessSection = dynamic(() => import("@/components/ui/ProcessSection"), {
+const LazyProcessSection = dynamic(() => import("../components/ui/ProcessSection"), {
   loading: () => <div className="min-h-[50vh] w-full flex items-center justify-center bg-white"><div className="animate-pulse flex flex-col items-center gap-4"><div className="w-12 h-12 rounded-full border-4 border-blue-600/30 border-t-blue-600 animate-spin"></div><p className="text-slate-500 font-medium">Loading Processes...</p></div></div>,
   ssr: false
 });
 
-const LazyTechMarquee = dynamic(() => import("@/components/ui/TechMarquee"), { ssr: false });
-const LazyClientTestimonialsSection = dynamic(() => import("@/components/ui/ClientTestimonialsSection"), { ssr: false });
+const LazyTechMarquee = dynamic(() => import("../components/ui/TechMarquee"), { ssr: false });
+const LazyClientTestimonialsSection = dynamic(() => import("../components/ui/ClientTestimonialsSection"), { ssr: false });
 
 const Stars = () => {
   // Static array of stars to prevent hydration mismatch, or we can just use fixed positions
@@ -112,7 +112,7 @@ export default function AtiorPage() {
       <nav className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md">
         <div className="w-full px-6 md:px-8 h-20 flex items-center justify-start max-w-[1400px] mx-auto">
           <div className="flex items-center justify-start gap-2 mr-14">
-            <AtiorLogo className="w-8 h-8 dark:invert-0 invert" />
+            <AtiorLogo className="w-20 h-40 dark:invert-0 invert" />
             <span className="font-medium text-2xl hidden sm:block tracking-tight text-[#202124]">Atior Technologies</span>
           </div>
           <div className="hidden md:flex items-center justify-start gap-8 text-[15px] font-medium text-[#5e6368]">
