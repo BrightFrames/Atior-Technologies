@@ -9,8 +9,24 @@ import { Badge } from "../components/ui/badge";
 import { Separator } from "../components/ui/separator";
 import AtiorLogo from "../components/ui/AtiorLogo";
 import { SplineScene } from "../components/ui/splite";
-import AntigravityBackground from "../components/ui/AntigravityBackground";
 import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+
+const LazyAntigravityBackground = dynamic(() => import("../components/ui/AntigravityBackground"), {
+  ssr: false,
+  loading: () => (
+    <div className="absolute inset-0 -z-30 pointer-events-none flex items-center justify-center">
+      <div className="w-48 h-48 rounded-full bg-gradient-to-br from-white/60 to-slate-100/40 blur-xl" />
+    </div>
+  ),
+});
+
+const LazySplineScene = dynamic(() => import("../components/ui/splite").then(mod => mod.SplineScene), {
+  ssr: false,
+  loading: () => (
+    <div className="w-[360px] h-[360px] bg-gradient-to-br from-white/60 to-slate-100/40 rounded-xl" />
+  ),
+});
 
 const LazyWorkSection = dynamic(() => import("../components/ui/WorkSection"), {
   loading: () => <div className="h-screen w-full flex items-center justify-center bg-slate-50"><div className="animate-pulse flex flex-col items-center gap-4"><div className="w-12 h-12 rounded-full border-4 border-blue-600/30 border-t-blue-600 animate-spin"></div><p className="text-slate-500 font-medium">Loading Work Showcase...</p></div></div>,
@@ -76,6 +92,21 @@ const SwingingCircle = () => {
 };
 
 export default function AtiorPage() {
+  const [phase, setPhase] = useState<"words" | "brand" | "background">("words");
+  const heroWords = ["New-Generation", "Products"];
+
+  useEffect(() => {
+    if (phase === "words") {
+      const total = heroWords.length * 700 + 300; // allow word animation to finish
+      const t = setTimeout(() => setPhase("brand"), total);
+      return () => clearTimeout(t);
+    }
+
+    if (phase === "brand") {
+      const t2 = setTimeout(() => setPhase("background"), 900);
+      return () => clearTimeout(t2);
+    }
+  }, [phase]);
   const problemPoints = [
     "Unreliable development teams that miss deadlines",
     "Poorly designed systems that need a complete rebuild",
@@ -130,9 +161,21 @@ export default function AtiorPage() {
       <main className="pb-24">
         {/* Exact Hero Layout Match */}
         <section className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 text-center pt-20">
-          <AntigravityBackground />
-          <Stars />
-          <SwingingCircle />
+          {phase === "background" ? (
+            <>
+              <LazyAntigravityBackground />
+              <Stars />
+              <SwingingCircle />
+              <div className="absolute inset-0 flex items-center justify-center -z-20 opacity-50 pointer-events-none">
+                <div className="w-[800px] h-[800px]">
+                  <LazySplineScene 
+                    scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
+                    className="w-full h-full"
+                  />
+                </div>
+              </div>
+            </>
+          ) : null}
           
           <div className="absolute inset-0 flex items-center justify-center -z-20 opacity-50 pointer-events-none">
             <div className="w-[800px] h-[800px]">
@@ -157,10 +200,34 @@ export default function AtiorPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-6xl md:text-8xl font-bold tracking-tight mb-6 leading-[1.1] text-foreground"
+            className="font-bold tracking-tight mb-6 leading-[1.1] text-foreground"
           >
-            Atior Technologies<br />
-            New-Generation Products
+            {/* Phase 1: reveal words one-by-one */}
+            <div className="mb-2">
+              <div className="flex items-center justify-center gap-4">
+                {phase === "brand" || phase === "background" ? (
+                  <>
+                    <AtiorLogo className="w-14 h-14" />
+                    <span className="text-3xl md:text-[3.6rem]">Atior Technologies</span>
+                  </>
+                ) : null}
+              </div>
+            </div>
+
+            <div className="flex items-center justify-center gap-4">
+              {heroWords.map((w, i) => (
+                <motion.span
+                  key={w}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: phase === "words" || phase !== "words" ? 1 : 0, y: 0 }}
+                  transition={{ delay: i * 0.7, duration: 0.45 }}
+                  className={`inline-block text-4xl md:text-8xl font-extrabold ${i > 0 ? "ml-3" : ""}`}
+                  style={{ visibility: phase === "words" || phase !== "words" ? "visible" : "hidden" }}
+                >
+                  {w}
+                </motion.span>
+              ))}
+            </div>
           </motion.h1>
           
           <motion.p 

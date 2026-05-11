@@ -10,10 +10,11 @@ export default function AtiorLogo({ className = "" }: AtiorLogoProps) {
       <Image
         src="/atior-logo.png"
         alt="Atior logo"
-        fill
-        sizes="(max-width: 640px) 128px, 160px"
+        width={160}
+        height={160}
+        sizes="(max-width: 640px) 64px, 96px"
         className="object-contain"
-        priority
+        loading="lazy"
       />
     </div>
   );

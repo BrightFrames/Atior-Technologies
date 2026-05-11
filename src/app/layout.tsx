@@ -16,9 +16,12 @@ export const metadata: Metadata = {
   title: "Atior Technology",
   description: "Atior Technology - Building Powerful Digital Solutions",
   icons: {
-    icon: [{ url: "/atior-logo.png", type: "image/png" }],
-    shortcut: [{ url: "/atior-logo.png", type: "image/png" }],
-    apple: [{ url: "/atior-logo.png", type: "image/png" }],
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/atior-logo.png", type: "image/png" },
+    ],
+    shortcut: [{ url: "/favicon.svg", type: "image/svg+xml" }],
+    apple: [{ url: "/favicon.svg", type: "image/svg+xml" }],
   },
 };
 
