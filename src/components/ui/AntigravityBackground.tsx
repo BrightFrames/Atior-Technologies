@@ -158,7 +158,7 @@ export default function AntigravityBackground() {
   return (
     <canvas
       ref={canvasRef}
-      className="absolute inset-0 pointer-events-none z-0"
+      className="absolute inset-0 pointer-events-none -z-30"
       style={{ display: "block", width: "100%", height: "100%" }}
     />
   );
