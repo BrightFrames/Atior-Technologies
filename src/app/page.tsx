@@ -219,10 +219,10 @@ export default function AtiorPage() {
                 <motion.span
                   key={w}
                   initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: phase === "words" || phase !== "words" ? 1 : 0, y: 0 }}
+                  animate={{ opacity: phase === "words" ? 1 : 0, y: 0 }}
                   transition={{ delay: i * 0.7, duration: 0.45 }}
                   className={`inline-block text-4xl md:text-8xl font-extrabold ${i > 0 ? "ml-3" : ""}`}
-                  style={{ visibility: phase === "words" || phase !== "words" ? "visible" : "hidden" }}
+                  style={{ visibility: phase === "words" ? "visible" : "hidden" }}
                 >
                   {w}
                 </motion.span>
