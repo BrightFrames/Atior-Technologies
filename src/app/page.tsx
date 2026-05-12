@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, CheckCircle2, ChevronRight, ChevronDown, XCircle, Layout, Layers, Terminal, PhoneCall, Mail, Globe, Star } from "lucide-react";
+import { ArrowRight, CheckCircle2, ChevronRight, ChevronDown, XCircle, Layout, Layers, Terminal, PhoneCall, Mail, Globe, Star, Linkedin, Instagram } from "lucide-react";
 
 import { Button } from "../components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "../components/ui/card";
@@ -148,9 +148,9 @@ export default function AtiorPage() {
         className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md"
       >
         <div className="w-full px-6 md:px-8 h-20 flex items-center justify-start max-w-[1400px] mx-auto">
-          <div className="flex items-center justify-start gap-1 mr-14">
-            <AtiorLogo className="w-10 h-10" />
-            <span className="font-medium text-2xl hidden sm:block tracking-tight text-[#202124]">Atior Technologies</span>
+          <div className="flex items-center justify-start gap-2 mr-14">
+            <AtiorLogo className="w-12 h-12 translate-y-2" />
+            <span className="font-medium text-2xl hidden sm:block tracking-tight text-[#202124] -translate-y-1">Atior Technologies</span>
           </div>
           <div className="hidden md:flex items-center justify-start gap-8 text-[15px] font-medium text-[#5e6368]">
             <a href="#services" className="hover:text-[#202124] transition-colors">Services</a>
@@ -159,17 +159,19 @@ export default function AtiorPage() {
             <a href="#clients" className="hover:text-[#202124] transition-colors flex items-center gap-1">Clients <ChevronDown className="w-4 h-4 text-gray-400" /></a>
           </div>
           <div className="ml-auto flex items-center justify-end">
-            <Button className="rounded-full shadow-none font-medium px-6 bg-[#202124] text-white hover:bg-[#3c4043]">Contact Us</Button>
+            <a href="#contact">
+              <Button className="rounded-full shadow-none font-medium px-6 bg-[#202124] text-white hover:bg-[#3c4043]">Contact Us</Button>
+            </a>
           </div>
         </div>
       </motion.nav>
 
       <main className="pb-24">
         {/* Hero Section - Antigravity Style */}
-        <section className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 text-center pt-20">
+        <section className="relative z-10 overflow-hidden w-full min-h-screen flex flex-col items-center justify-center px-6 text-center pt-20">
+          <LazyAntigravityBackground />
           {showBackground ? (
             <>
-              <LazyAntigravityBackground />
               <Stars />
               <SwingingCircle />
             </>
@@ -180,10 +182,10 @@ export default function AtiorPage() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 1.8, ease: "easeOut" }}
-            className="flex items-center justify-center gap-3 mb-4"
+            className="flex items-center justify-center gap-2 mb-4"
           >
-            <AtiorLogo className="w-16 h-16 dark:invert-0 invert" />
-            <span className="text-[#202124] text-2xl md:text-3xl font-semibold tracking-tight">Atior Technologies</span>
+            <AtiorLogo className="w-16 h-16 dark:invert-0 invert translate-y-2" />
+            <span className="text-[#202124] text-2xl md:text-3xl font-semibold tracking-tight -translate-y-1">Atior Technologies</span>
           </motion.div>
           
           {/* Main heading with typewriter animation */}
@@ -401,18 +403,20 @@ export default function AtiorPage() {
         <LazyClientTestimonialsSection />
 
         {/* CTA Section */}
-        <section className="max-w-6xl mx-auto px-6 py-32 relative z-10">
+        <section id="contact" className="max-w-6xl mx-auto px-6 py-32 relative z-10">
           <div className="grid md:grid-cols-2 gap-12 items-center bg-muted/20 border rounded-[3rem] p-10 md:p-16 shadow-2xl">
             <div className="text-left">
               <p className="text-sm font-bold tracking-widest text-muted-foreground uppercase mb-4">Ready to Build?</p>
               <h2 className="text-4xl md:text-6xl font-extrabold mb-8 text-foreground">Let's Build Something<br/><span className="text-muted-foreground italic font-serif">Exceptional</span></h2>
               <p className="text-muted-foreground mb-12 max-w-xl text-lg font-medium">If you're building a SaaS product, automation system, or want to bring an AI-powered idea to life — we'd love to be your technology partner.</p>
-              <Button size="lg" className="rounded-full font-bold px-10 h-16 text-lg shadow-2xl gap-3">
-                Start a Conversation <ArrowRight className="w-5 h-5" />
-              </Button>
+              <a href="mailto:info@atiortechnologies.com">
+                <Button size="lg" className="rounded-full font-bold px-10 h-16 text-lg shadow-2xl gap-3">
+                  Start a Conversation <ArrowRight className="w-5 h-5" />
+                </Button>
+              </a>
               <div className="mt-12 flex flex-col sm:flex-row items-start gap-6 text-sm font-bold text-muted-foreground">
-                <span className="flex items-center gap-2 hover:text-foreground cursor-pointer transition-colors"><Mail className="w-4 h-4"/> info@atiortechnologies.com</span>
-                <span className="flex items-center gap-2 hover:text-foreground cursor-pointer transition-colors"><PhoneCall className="w-4 h-4"/> +91 7696834279</span>
+                <a href="mailto:info@atiortechnologies.com" className="flex items-center gap-2 hover:text-foreground cursor-pointer transition-colors"><Mail className="w-4 h-4"/> info@atiortechnologies.com</a>
+                <a href="tel:+917696834279" className="flex items-center gap-2 hover:text-foreground cursor-pointer transition-colors"><PhoneCall className="w-4 h-4"/> +91 7696834279</a>
               </div>
             </div>
             
@@ -431,18 +435,21 @@ export default function AtiorPage() {
       <footer className="border-t bg-muted/30 py-16 relative z-10">
         <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-12">
           <div className="col-span-1 md:col-span-2">
-            <div className="flex items-center mb-6">
-              <AtiorLogo className="w-40 h-10 dark:invert-0 invert" />
+            <div className="flex items-center mb-6 gap-2">
+              <AtiorLogo className="w-12 h-12 dark:invert-0 invert translate-y-2" />
+              <span className="font-semibold text-2xl tracking-tight text-[#202124] -translate-y-1">Atior Technologies</span>
             </div>
             <p className="text-sm text-muted-foreground mb-8 max-w-sm font-medium leading-relaxed">
               Trusted by 100+ startups and growing businesses. More than 50+ products successfully delivered.
             </p>
             <div className="flex gap-4">
+              <a href="https://www.linkedin.com/company/atior-technologies" target="_blank" rel="noopener noreferrer">
+                <Button variant="outline" size="icon" className="rounded-full shadow-sm">
+                  <Linkedin className="w-5 h-5" />
+                </Button>
+              </a>
               <Button variant="outline" size="icon" className="rounded-full shadow-sm">
-                in
-              </Button>
-              <Button variant="outline" size="icon" className="rounded-full shadow-sm">
-                ig
+                <Instagram className="w-5 h-5" />
               </Button>
             </div>
           </div>

@@ -40,7 +40,7 @@ export default function AntigravityBackground() {
         this.y = this.baseY;
         
         // Size variation for dashes
-        this.size = Math.random() * 3 + 2;
+        this.size = Math.random() * 5 + 3.5;
         this.color = colors[Math.floor(Math.random() * colors.length)];
         // Rotation speed
         this.speed = (Math.random() - 0.5) * 0.002;
