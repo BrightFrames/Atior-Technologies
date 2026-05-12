@@ -92,21 +92,22 @@ const SwingingCircle = () => {
 };
 
 export default function AtiorPage() {
-  const [phase, setPhase] = useState<"words" | "brand" | "background">("words");
-  const heroWords = ["New-Generation", "Products"];
+  const [showBackground, setShowBackground] = useState(false);
+  const heroWords = [
+    { text: "New-Generation", className: "font-black text-[#1a1a1a]" },
+    { text: " ", className: "" },
+    { text: "Products", className: "font-medium text-[#b0b0b0] italic" },
+  ];
+  const heroChars = heroWords.flatMap((word) =>
+    word.text.split("").map((char) => ({ char, className: word.className }))
+  );
 
   useEffect(() => {
-    if (phase === "words") {
-      const total = heroWords.length * 700 + 300; // allow word animation to finish
-      const t = setTimeout(() => setPhase("brand"), total);
-      return () => clearTimeout(t);
-    }
+    // Load background effects after hero animation completes
+    const t = setTimeout(() => setShowBackground(true), 2500);
+    return () => clearTimeout(t);
+  }, []);
 
-    if (phase === "brand") {
-      const t2 = setTimeout(() => setPhase("background"), 900);
-      return () => clearTimeout(t2);
-    }
-  }, [phase]);
   const problemPoints = [
     "Unreliable development teams that miss deadlines",
     "Poorly designed systems that need a complete rebuild",
@@ -139,11 +140,16 @@ export default function AtiorPage() {
       <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-[128px] -z-30 pointer-events-none mix-blend-multiply" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-indigo-600/5 rounded-full blur-[128px] -z-30 pointer-events-none mix-blend-multiply" />
 
-      {/* Navbar */}
-      <nav className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md">
+      {/* Navbar - appears after typewriter */}
+      <motion.nav
+        initial={{ opacity: 0, y: -20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 1.8, ease: "easeOut" }}
+        className="fixed top-0 inset-x-0 z-50 bg-white/80 backdrop-blur-md"
+      >
         <div className="w-full px-6 md:px-8 h-20 flex items-center justify-start max-w-[1400px] mx-auto">
-          <div className="flex items-center justify-start gap-2 mr-14">
-            <AtiorLogo className="w-20 h-40 dark:invert-0 invert" />
+          <div className="flex items-center justify-start gap-1 mr-14">
+            <AtiorLogo className="w-10 h-10" />
             <span className="font-medium text-2xl hidden sm:block tracking-tight text-[#202124]">Atior Technologies</span>
           </div>
           <div className="hidden md:flex items-center justify-start gap-8 text-[15px] font-medium text-[#5e6368]">
@@ -156,86 +162,73 @@ export default function AtiorPage() {
             <Button className="rounded-full shadow-none font-medium px-6 bg-[#202124] text-white hover:bg-[#3c4043]">Contact Us</Button>
           </div>
         </div>
-      </nav>
+      </motion.nav>
 
       <main className="pb-24">
-        {/* Exact Hero Layout Match */}
+        {/* Hero Section - Antigravity Style */}
         <section className="relative w-full min-h-screen flex flex-col items-center justify-center px-6 text-center pt-20">
-          {phase === "background" ? (
+          {showBackground ? (
             <>
               <LazyAntigravityBackground />
               <Stars />
               <SwingingCircle />
-              <div className="absolute inset-0 flex items-center justify-center -z-20 opacity-50 pointer-events-none">
-                <div className="w-[800px] h-[800px]">
-                  <LazySplineScene 
-                    scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                    className="w-full h-full"
-                  />
-                </div>
-              </div>
             </>
           ) : null}
           
-          <div className="absolute inset-0 flex items-center justify-center -z-20 opacity-50 pointer-events-none">
-            <div className="w-[800px] h-[800px]">
-              <SplineScene 
-                scene="https://prod.spline.design/kZDDjO5HuC9GJUM2/scene.splinecode"
-                className="w-full h-full"
-              />
-            </div>
-          </div>
-          
+          {/* Brand mark - appears after typewriter */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-3 p-1 pr-5 rounded-full bg-muted border border-border text-sm font-medium mb-12 shadow-sm"
+            transition={{ duration: 0.7, delay: 1.8, ease: "easeOut" }}
+            className="flex items-center justify-center gap-3 mb-4"
           >
-            <span className="px-3 py-1 rounded-full bg-primary text-primary-foreground text-xs font-bold tracking-widest">NEW</span>
-            <span className="text-foreground font-semibold">Automated Scale Generation</span>
+            <AtiorLogo className="w-16 h-16 dark:invert-0 invert" />
+            <span className="text-[#202124] text-2xl md:text-3xl font-semibold tracking-tight">Atior Technologies</span>
           </motion.div>
           
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-bold tracking-tight mb-6 leading-[1.1] text-foreground"
-          >
-            {/* Phase 1: reveal words one-by-one and show brand inline */}
-            <div className="flex items-center justify-center gap-6">
-              {phase === "brand" || phase === "background" ? (
-                <div className="flex items-center gap-3">
-                  <AtiorLogo className="w-14 h-14" />
-                  <span className="text-3xl md:text-[3.6rem]">Atior Technologies</span>
-                </div>
-              ) : null}
-
-              <div className="flex items-center gap-4">
-                {heroWords.map((w, i) => (
-                  <motion.span
-                    key={w}
-                    initial={{ opacity: 0, y: 8 }}
-                    animate={{ opacity: phase === "words" ? 1 : 0, y: 0 }}
-                    transition={{ delay: i * 0.7, duration: 0.45 }}
-                    className={`inline-block text-4xl md:text-8xl font-extrabold ${i > 0 ? "ml-3" : ""}`}
-                    style={{ visibility: phase === "words" ? "visible" : "hidden" }}
-                  >
-                    {w}
-                  </motion.span>
-                ))}
-              </div>
-            </div>
-          </motion.h1>
+          {/* Main heading with typewriter animation */}
+          <h1 className="tracking-tight mb-8 leading-[1.1] w-full text-center mx-auto px-4 whitespace-nowrap relative" style={{ fontSize: 'clamp(2.5rem, 7.5vw, 8rem)' }}>
+            {heroChars.map((item, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{
+                  duration: 0.01,
+                  delay: 0.5 + i * 0.07,
+                  ease: "linear",
+                }}
+                className={item.className}
+                style={{ display: "inline-block" }}
+              >
+                {item.char === " " ? "\u00A0" : item.char}
+              </motion.span>
+            ))}
+            {/* Blinking cursor */}
+            <motion.span
+              initial={{ opacity: 0 }}
+              animate={{ opacity: [0, 1, 1, 0] }}
+              transition={{
+                duration: 0.8,
+                repeat: Infinity,
+                repeatType: "loop",
+                delay: 0.5 + heroChars.length * 0.07,
+              }}
+              className="inline-block align-middle bg-[#1a1a1a] ml-1"
+              style={{ width: '4px', height: '0.8em' }}
+            />
+          </h1>
           
+          {/* Subtitle */}
           <motion.p 
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto font-medium"
+            transition={{ duration: 0.6, delay: 1.9, ease: "easeOut" }}
+            className="text-lg md:text-xl text-[#5e6368] max-w-2xl mx-auto font-normal leading-relaxed text-center"
           >
             Atior.Tech : Scalable Digital Products for Modern Businesses, Architecture That Converts.
           </motion.p>
+
         </section>
 
         {/* Technologies Marquee Slider */}
